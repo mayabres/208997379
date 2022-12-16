@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile</title>
+    <link rel="stylesheet" href="../static/Styles.css">
+    <script defer src="../static/data.js"></script>
+</head>
+<body id="MyProfile" class="rtl">
+    <nav class="nav_style">
+        <a class="nav_item" href="HomePage.html">התנתק</a>
+        <a class="nav_item" href="TripsThatIDid.html">מסלולים שביצעתי</a>
+        <a class="nav_item" href="TripsThatIWillDo.html">מסלולים שארצה לבצע</a>
+        <a class="nav_item" href="MyProfile.html">הפרופיל שלי</a>
+        <a class="nav_item" href="MyGroups.html">הקבוצות שלי</a>
+        <a class="nav_item" href="SearchTrips.html">חיפוש מסלולים</a>
+        <a class="nav_item" href="ContactUsAfterSignIn.html">צור קשר</a>
+    </nav>
+    <div class="Presentation">
+        <div></div>
+        <div class="Background">
+            <h1>מידע אישי</h1>
+            <div class="details">
+                <div class="profileContent">
+                    <label style="font-weight: bold">שם פרטי</label>
+                </div>
+                <p class="profileContent" id="firstName" contenteditable="false" >מאיה</p>
+            </div>
+            <div class="details">
+                <div class="profileContent">
+                    <label style="font-weight: bold">שם משפחה</label>
+                </div>
+                <p class="profileContent" id="lastName" contenteditable="false">ברסלאור</p>
+            </div>
+            <div class="details">
+                <div class="profileContent">
+                    <label style="font-weight: bold">טלפון</label>
+                </div>
+                <p class="profileContent" id="phoneNumber" contenteditable="false">0524368251</p>
+            </div>
+            <div class="details">
+                <div class="profileContent">
+                    <label style="font-weight: bold">תאריך לידה</label>
+                </div>
+                <p  class="profileContent" id="dob" contenteditable="false">14-06-1997</p>
+            </div>
+            <div class="details">
+                <div class="profileContent">
+                    <label style="font-weight: bold">מייל</label>
+                </div>
+                <p class="profileContent" id="mail" contenteditable="false">mayabres@post.bgu.ac.il</p>
+            </div>
+            <button type="submit" onclick="saveProfileDetails()">אישור</button>
+            <button type="submit" onclick="edit()">ערוך</button>
+        </div>
+        <div></div>
+    </div>
+<footer><p>TRIPSI - Discover Your Country!</p></footer>
+</body>
+</html>

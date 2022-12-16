@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="../static/Styles.css">
+    <script defer src="../static/data.js"></script>
+</head>
+<body id="SignIn">
+    <nav class="nav_style">
+        <a href="HomePage.html">מסך הבית</a>
+        <a href="AboutUs.html">קצת עלינו</a>
+        <a href="ContactUs.html">צור קשר</a>
+    </nav>
+    <div class="Presentation">
+        <div></div>
+        <div  class="rtl Background">
+            <h1>התחברות</h1>
+            <form action="SearchTrips.html" method="post" onsubmit="return alertSignIn()">
+                  <div class="signIn_form_group">
+                  <label >מייל</label>
+                  <input class="textbox" id="email" type="email" placeholder="israel12@gmail.com" required/>
+              </div>
+              <div class="signIn_form_group">
+                  <label >סיסמא</label>
+                  <input class="textbox" id="password" type="password" placeholder="********" required minlength="6"/>
+              </div>
+              <button type="submit" class="btn_sn">אישור</button>
+            </form>
+        </div>
+        <div></div>
+    </div>
+<footer id="footHomePage"><p>TRIPSI - Discover Your Country!</p></footer>
+</body>
+</html>

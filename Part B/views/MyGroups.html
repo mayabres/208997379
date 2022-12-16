@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Groups</title>
+    <link rel="stylesheet" href="../static/Styles.css">
+    <script defer src="../static/data.js"></script>
+</head>
+<body id="MyGroups11" class="rtl" onload="watchGroupData(), optionsMembers()">
+    <nav class="nav_style">
+        <a href="HomePage.html">התנתק</a>
+        <a href="TripsThatIDid.html">מסלולים שביצעתי</a>
+        <a href="TripsThatIWillDo.html">מסלולים שארצה לבצע</a>
+        <a href="MyProfile.html">הפרופיל שלי</a>
+        <a href="MyGroups.html">הקבוצות שלי</a>
+        <a href="SearchTrips.html">חיפוש מסלולים</a>
+        <a href="ContactUsAfterSignIn.html">צור קשר</a>
+    </nav>
+    <div class="presentationTrips rtl">
+        <div></div>
+        <div class="Background" >
+            <div>
+                <h1>הקבוצות שלי</h1>
+                <button onclick="addFriendFormGroup()" id="createBtn">צור קבוצה חדשה</button>
+                <div id="hiddenForm" style="display: none;">
+                    <div>
+                       <table class="myTrips" id="groupMembers">
+                        <thead>
+                            <tr>
+                                <th>שם</th>
+                                <th>מייל</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>מאיה ברסלאור</td>
+                                <td>mayabres@post.bgu.ac.il</td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <form class="form rtl" method="post" onsubmit="return false">
+                            <div class="signIn_form_group">
+                                <label>שם הקבוצה</label>
+                               <input class="textbox" type="text" id="groupName">
+                            </div>
+                            <div class="signIn_form_group">
+                                <label>בחר את חברי הקבוצה</label>
+                                <select name="optionsMembers" id="optionsMembers"></select>
+                            </div>
+                            <button type="submit" onclick="addUserToGroup()">הוסף חבר</button>
+                            <button type="submit" onclick="createGroup()">צור קבוצה</button>
+                        </form>
+                            <button type="button" onclick="cancelCreateGroup()" id="cancelBtn">בטל</button>
+                    </div>
+                </div>
+                <p>על מנת לצפות בפרטי הקבוצה - לחץ על השורה המתאימה בטבלה</p>
+               <table class="myGroups" id="myGroups1">
+                <thead>
+                    <tr class="clickable">
+                        <th>תאריך יצירת הקבוצה</th>
+                        <th>שם הקבוצה</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="table_body">
+                    <tr class="clickable">
+                        <td>07-12-2022</td>
+                        <td>המטיילים הכי טובים!</td>
+                        <td><button type="button" @onclick:stopPropagation="true" onclick="removeMembership(this)">הסר חברות</button></td>
+                    </tr>
+                    <tr class="clickable">
+                        <td>10-12-2022</td>
+                        <td>מטיילים כמו תיירים</td>
+                        <td><button type="button" @onclick:stopPropagation="true" onclick="removeMembership(this)">הסר חברות</button></td>
+                    </tr>
+                </tbody>
+               </table>
+            </div>
+        </div>
+       <div></div>
+   </div>
+<footer><p>TRIPSI - Discover Your Country!</p></footer>
+</body>
+</html>

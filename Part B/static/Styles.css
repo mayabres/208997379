@@ -1,0 +1,480 @@
+.activePage{
+    border: 2px solid blue;
+    border-radius: 30px;
+}
+.textbox{
+    background-color: white;
+    border-color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+*{
+    font-family: Calibri;
+    overflow-y: hidden;
+}
+
+.form_group{
+    justify-content: space-between;
+}
+
+#dobLabel{
+   width: 170px;
+}
+
+h1{
+    font-size: 3.5vw;
+    margin-top: 5%;
+    font-weight: bold;
+    text-align: center;
+    direction : rtl !important;
+}
+
+.date{
+    width: 200px;
+    margin-top: 10px;
+    border-color: white;
+    font-size: 20px;
+    border-radius: 5px;
+    color: gray;
+}
+
+footer{
+    position: -ms-device-fixed;
+    bottom:0;
+    width: 100%;
+    background-color: white;
+    overflow: inherit;
+}
+
+footer p{
+    font-size: 1.2vw;
+    color: darkblue;
+    font-weight: bold;
+    overflow: auto;
+    text-align: center;
+}
+
+label{
+    width: 170px;
+    padding: 0;
+    font-size: 1.3vw;
+    font-weight: bold;
+}
+
+.nav_style{
+      width: 100%;
+      position: absolute; /* Stay in place */
+      background-color: white;
+      top: 0;
+}
+
+a{
+    display: inline-block;
+    text-decoration: none;
+    font-size: 1.2vw;
+    color: darkblue;
+    font-weight: bold;
+    padding: 10px;
+    float: right;
+}
+
+body{
+    background-color: lightsteelblue;
+    margin: 0;
+    font-size: 1.2vw;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+button{
+    margin: 20px 40px;
+    padding-left: 40px;
+    padding-right: 40px;
+    color: white;
+    font-size: 40px;
+    border-radius: 15px;
+    background-color: black;
+}
+
+button:hover{
+    background-color: lightsteelblue;
+    color: black;
+    animation: buttonEffect 0.4s infinite;
+}
+
+@keyframes buttonEffect {
+        0% {
+            transform: translateX(0px) rotate(0deg);
+        }
+        20% {
+            transform: translateX(-4px) rotate(-4deg);
+        }
+        40% {
+            transform: translateX(-2px) rotate(-2deg);
+        }
+        60% {
+            transform: translateX(4px) rotate(4deg);
+        }
+        80% {
+            transform: translateX(2px) rotate(2deg);
+        }
+        100% {
+            transform: translateX(0px) rotate(0deg);
+        }
+    }
+
+.rtl{
+    text-align: center;
+    direction : rtl !important;
+}
+
+/**************homepage*********************/
+#homepage_background{
+    background-image: url("Pictures/Pic5.jpg");
+    background-size: 50% 100%;
+    background-attachment: fixed;
+    background-position: right;
+    animation: changePics 8s infinite;
+}
+
+@keyframes changePics{
+    0%{
+        background-image: url("Pictures/Pic5.jpg");
+    }
+    25%{
+        background-image: url("Pictures/Pic6.jpg");
+    }
+    50%{
+        background-image: url("Pictures/Pic7.jpg");
+    }
+    75%{
+        background-image: url("Pictures/Pic.jpg");
+    }
+    100%{
+        background-image: url("Pictures/Pic5.jpg");
+    }
+}
+
+#buttons_homepage{
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    bottom: 8vh;
+    right: 0;
+}
+
+.homepage_logo{
+    margin-top: 4%;
+    margin-left: 4%;
+    height: 80vh;
+    width: 40vw;
+    position: absolute;
+
+}
+
+#footHomePage{
+    position: absolute;
+}
+
+/*****************SignIn********************/
+
+#SignIn{
+    background-image: url("Pictures/SignInBackground.jpg");
+    background-attachment: fixed;
+    position: fixed;
+	backdrop-filter: blur(5px);
+}
+
+.signIn_form_group{
+    padding: 10px;
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center
+}
+
+.Background{
+    background-color: lightsteelblue;
+    opacity: 0.8;
+    padding-bottom: 7%;
+    padding-right: 10%;
+    padding-left: 10%;
+    border-radius: 50px;
+    margin-bottom: 7%;
+}
+
+.BackgroundGroup{
+    background-color: lightsteelblue;
+    opacity: 0.8;
+    padding-bottom: 7%;
+    padding-right: 4%;
+    padding-left: 4%;
+    border-radius: 50px;
+    margin-bottom: 7%;
+}
+
+.Presentation{
+    display: grid;
+    margin-top: 7%;
+    grid-template-areas: 'div div div';
+    grid-template-columns: 2fr 5fr 2fr;
+}
+
+.presentationTrips{
+    display: grid;
+    margin-top: 7%;
+    grid-template-areas: 'div div div';
+    grid-template-columns: 1fr 9fr 1fr;
+}
+
+.presentationGroups{
+    display: grid;
+    grid-template-areas: 'header header header'
+                        ' div div';
+    grid-template-columns: 8fr 3.5fr;
+}
+
+.btn_sn{
+    margin-top: 40px;
+    bottom: 0;
+    float: left;
+}
+
+/******************SignUp****************************/
+
+#SignUp{
+    background-image: url("Pictures/Pic3.jpeg");
+    background-attachment: fixed;
+    position: fixed;
+	backdrop-filter: blur(5px);
+}
+
+.Background1{
+    background-color: lavender;
+    opacity: 0.7;
+    padding-bottom: 7%;
+    padding-right: 10%;
+    padding-left: 10%;
+    margin-bottom: 5%;
+    border-radius: 50px;
+}
+
+/***********AboutUs*****************************/
+
+#AboutUs{
+    background-image: url("Pictures/Pic4.jpeg");
+    background-attachment: fixed;
+    position: fixed;
+	backdrop-filter: blur(5px);
+}
+
+/********************ContactUs*************************/
+
+#ContactUs, #ContactUsAfter{
+    background-image: url("Pictures/Pic11.jpg");
+    background-attachment: fixed;
+    position: fixed;
+    backdrop-filter: blur(8px);
+}
+
+/*******************SearchTrips*********************/
+
+#Trips{
+    background-image: url("Pictures/Pic12.jpg");
+    background-attachment: fixed;
+    position: fixed;
+    backdrop-filter: blur(5px);
+}
+
+.st{
+    padding-top: 20px;
+    font-size: 20px;
+    position: center;
+}
+
+#optionsAreas, #optionsLong, #optionsDif, #optionsWater, #optionsShadow, #optionsMembers{
+    /*font-family: Calibri;*/
+    font-size: 1.2vw;
+    opacity: 0.8;
+    border-radius: 5px;
+    background-color: white;
+    border-color: white;
+    width: 170px;
+}
+
+#area, #long,  #dif, #water, #shadow{
+    /*font-size: 1.3vw;*/
+    /*font-weight: bold;*/
+    margin-bottom: -5px;
+    display: inline-block;
+
+}
+
+/***********************TripsThatIDid******************/
+
+.trips-container{
+    background: lightsteelblue;
+    opacity: 0.7;
+    border-radius: 10px;
+}
+
+.activeForm{
+    display: block;
+}
+
+/*******************MyProfile************************/
+
+#MyProfile{
+    background-image: url("Pictures/Pic13.jpg");
+    background-attachment: fixed;
+    position: fixed;
+    backdrop-filter: blur(5px);
+}
+
+
+.details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.profileContent{
+    margin-top: 10px;
+    padding: 5px;
+    width: 60%;
+    border-radius: 10px;
+}
+
+/********************WriteReccomendation********************/
+
+#bigTextBox{
+    width: 400px;
+    height: 200px;
+    font-size: 20px;
+}
+
+#headerPage{
+    margin-top: 5%;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    direction : rtl !important;
+}
+
+/****************TableDecoration*********************/
+.myTrips, .myGroups{
+    border-collapse: collapse;
+    font-size: 1.1vw;
+    width: 60vw;
+    position: center;
+    margin-right: 4%;
+    margin-bottom: 30px;
+}
+
+ .myGroupsData{
+     position: center;
+     border-collapse: collapse;
+    font-size: 1.1vw;
+    width: 50vw;
+    /*margin-right: 5%;*/
+    margin-bottom: 30px;
+ }
+
+#groupMembers1, #groupMembers{
+   width: 60%;
+}
+
+.myTrips td, .myTrips th, .myGroups td,.myGroups th ,.myGroupsData td, .myGroupsData th{
+    border: 2px solid black;
+    padding: 8px;
+    cursor: pointer;
+
+}
+.myTrips tr:nth-child(even), .myGroups tr:nth-child(even){background-color: #f2f2f2;}
+
+.myTrips tr:hover , .myGroups tr:hover, .myGroupsData tr:hover{background-color: #ddd;}
+
+.myTrips th , .myGroups th, .myGroupsData th{
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    background-color: cornflowerblue;
+    color: black;
+}
+
+tr:hover {
+ box-shadow: 0px 9px 4px -6px blue;
+}
+
+tr:hover td {
+  transform: scaleX(1.05);
+}
+
+.big{
+    font-weight: bold;
+    border: 4px dashed blue;
+    border-radius: 3px;
+}
+
+.btnTable{
+    font-size: 20px;
+    text-align: center;
+    width: 90px;
+    padding: 0;
+
+}
+
+/**********************TripsReccomendations****************/
+
+#TripReccomendations{
+    background-image: url("Pictures/Pic13.jpg");
+    background-attachment: fixed;
+    position: fixed;
+    backdrop-filter: blur(5px);
+}
+
+/***********************MyGroups*********************/
+
+#MyGroups11, #MyGroups{
+    background-image: url("Pictures/Pic13.jpg");
+    background-attachment: fixed;
+    position: fixed;
+    backdrop-filter: blur(5px);
+}
+
+@media only screen and (max-width: 1000px){
+
+     .textbox, .date, #optionsAreas, #optionsLong, #optionsDif, #optionsWater, #optionsShadow, #optionsMembers, button,
+    #area, #long,  #dif, #water, #shadow, .body, .form, label, a, p, footer, footer p{
+        font-size: 10px;
+    }
+    .myTrips, .myGroups, .myGroupsData{
+        font-size: 10px;
+        position: center;
+    }
+    h1{
+        font-size: 30px;
+    }
+    .signIn_form_group{
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    #optionsAreas, #optionsLong, #optionsDif, #optionsWater, #optionsShadow{
+        margin-top: 15px;
+    }
+    #MyProfile footer, #ContactUsAfter footer, #MyGroups11 footer{
+        bottom: 0;
+        float: none;
+        position: fixed;
+    }
+
+
+}
+
+
+

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Trips</title>
+    <link rel="stylesheet" href="../static/Styles.css">
+    <script defer src="../static/data.js"></script>
+    
+</head>
+<body id="Trips" onload="addDataDid()">
+   <nav class="nav_style">
+        <a href="HomePage.html">התנתק</a>
+        <a href="TripsThatIDid.html">מסלולים שביצעתי</a>
+        <a href="TripsThatIWillDo.html">מסלולים שארצה לבצע</a>
+        <a href="MyProfile.html">הפרופיל שלי</a>
+        <a href="MyGroups.html">הקבוצות שלי</a>
+        <a href="SearchTrips.html">חיפוש מסלולים</a>
+        <a href="ContactUsAfterSignIn.html">צור קשר</a>
+    </nav>
+   <div class="presentationTrips rtl">
+        <div></div>
+        <div class="Background" >
+            <h1>מסלולים שביצעתי</h1>
+            <div>
+               <table class="myTrips" >
+                <thead>
+                    <tr>
+                        <th style="width: 10%;">תאריך ביצוע</th>
+                        <th>שם המסלול</th>
+                        <th style="width: 8%">איזור בארץ</th>
+                        <th style="width: 60%;">תיאור קצר</th>
+                        <th>כתיבת המלצה</th>
+                    </tr>
+                </thead>
+                <tbody id="table_body"></tbody>
+               </table>
+            </div>
+        </div>
+       <div></div>
+   </div>
+<footer><p>TRIPSI - Discover Your Country!</p></footer>
+</body>
+</html>
