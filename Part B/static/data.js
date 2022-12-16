@@ -218,7 +218,7 @@ function addRowResults(i, trip) {
     cell7.innerHTML = trip.description;
     cell8.innerHTML = `<button type='button' id='re${i}' class="rtl btnTable" onclick='Idid("${i}")'>ביצעתי</button>`+
       `<form action='' id='rec${i}' style="display: none;" onsubmit="return false">`+
-        `<input type='date' id="didDate${i}" placeholder='DD-MM-YYYY' onclick="preventAction()" required>`+
+        `<input type='date' id="didDate${i}" placeholder='DD-MM-YYYY' onclick="preventAction()" required/>`+
         `<button type='button' class="rtl btnTable" onclick='IdidIt("re${i}","didDate${i}")'>אישור</button>`+
         `</form>`+
         `<button type='button' class="rtl btnTable" onclick='Ido(this)' >ארצה לבצע</button>`;
@@ -229,7 +229,7 @@ function IdidIt(t,i){
     let date = document.getElementById(i).value;
     const inputDate = new Date(date);
     const dateToday = new Date();
-    if(inputDate > dateToday){
+    if(inputDate > dateToday || !date){
         alert("אנא הכנס תאריך מתאים");
         event.stopImmediatePropagation();
     }
