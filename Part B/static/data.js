@@ -165,8 +165,9 @@ function addRowDo(i, trip) {
         `<input type='date' id="didDate${i}" placeholder='DD-MM-YYYY' onclick="preventAction()" required>`+
         `<button type='button' class="rtl btnTable" onclick='IdidIt("re${i}","didDate${i}")'>אישור</button>`+
         `</form>`+
-        `<button type='submit' class="rtl btnTable" id='re${i}' onclick="removeMembership(this)">הסר</button></form>`;
+        `<button type='submit' class="rtl btnTable" id='re${i}' onclick="Ido(this)">הסר</button></form>`;
 }
+
 
 //insert trips to the table
 function addRowGroup(i, trip) {
@@ -370,7 +371,7 @@ function addFriendForm(){
 // //remove my membership from specific group
 function removeMembership(t){
      var i = t.parentNode.parentNode.rowIndex;
-     document.getElementById('myGroups1').rows.item(i).classList.remove("clickable");
+     // document.getElementById('myGroups1').rows.item(i).classList.remove("clickable");
      document.getElementById('myGroups1').deleteRow(i);
      alert("הרשומה הוסרה מטבלה זו");
      event.stopImmediatePropagation();

@@ -41,10 +41,11 @@ h1{
 }
 
 footer{
-    bottom: 0pt;
+    position: -ms-device-fixed;
+    bottom:0;
     width: 100%;
     background-color: white;
-    overflow: auto;
+    overflow: inherit;
 }
 
 footer p{
@@ -326,10 +327,6 @@ button:hover{
     display: block;
 }
 
-#MyProfile footer,#ContactUsAfter footer{
-    bottom: 0;
-    margin-top: 7%;
-}
 /*******************MyProfile************************/
 
 #MyProfile{
@@ -443,7 +440,7 @@ tr:hover td {
 
 /***********************MyGroups*********************/
 
-#MyGroups{
+#MyGroups11, #MyGroups{
     background-image: url("Pictures/Pic13.jpg");
     background-attachment: fixed;
     position: fixed;
@@ -470,9 +467,12 @@ tr:hover td {
     #optionsAreas, #optionsLong, #optionsDif, #optionsWater, #optionsShadow{
         margin-top: 15px;
     }
-    #MyProfile footer, #ContactUsAfter footer{
+    #MyProfile footer, #ContactUsAfter footer, #MyGroups11 footer{
+        bottom: 0;
+        float: none;
         position: fixed;
     }
+
 
 }
 
