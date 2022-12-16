@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="../static/Styles.css">
+    <script defer src="../static/data.js"></script>
+</head>
+<body id="SignUp">
+    <nav class="nav_style">
+        <a class="nav_item" href="HomePage.html">מסך הבית</a>
+        <a class="nav_item" href="AboutUs.html">קצת עלינו</a>
+        <a class="nav_item" href="ContactUs.html">צור קשר</a>
+    </nav>
+    <div class="Presentation">
+        <div></div>
+        <div  class="Background1 ">
+            <h1>הרשמה לאתר</h1>
+          <form action="SearchTrips.html" class="form rtl" method="post" onsubmit="return validationSignUp()">
+              <div class="signIn_form_group">
+                  <label >שם פרטי*</label>
+                  <input class="textbox" type="text" id="firstName" placeholder="ישראל" required minlength="2"/>
+              </div>
+              <div class="signIn_form_group">
+                  <label >שם משפחה*</label>
+                  <input class="textbox" type="text" id="lastName" placeholder="ישראלי" required minlength="2"/>
+              </div>
+              <div class="signIn_form_group">
+                  <label >טלפון*</label>
+                  <input class="textbox" type="tel" id="phoneNumber" placeholder="05XXXXXXXX" required pattern="[0-9]{10}"/>
+              </div>
+              <div class="signIn_form_group">
+                  <label id="dobLabel">תאריך לידה*</label>
+                  <input class="date" type="date" id="dob" required>
+              </div>
+              <div class="signIn_form_group">
+                  <label >מייל*</label>
+                  <input class="textbox" id="email" type="email" placeholder="israel12@gmail.com" required/>
+              </div>
+              <div class="signIn_form_group">
+                  <label >סיסמא*</label>
+                  <input class="textbox" id="password" type="password" placeholder="*******" required minlength="6"/>
+              </div>
+              <div class="signIn_form_group">
+                  <label >אימות סיסמא*</label>
+                  <input class="textbox" id="password1" type="password" placeholder="*******" required minlength="6"/>
+              </div>
+              <button type="submit" class="btn_sn">אישור</button>
+          </form>
+        </div>
+        <div></div>
+    </div>
+<footer><p>TRIPSI - Discover Your Country!</p></footer>
+</body>
+</html>

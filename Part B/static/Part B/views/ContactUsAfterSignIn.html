@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="../static/Styles.css">
+    <script defer src="../static/data.js"></script>
+</head>
+<body id="ContactUsAfter">
+    <nav class="nav_style">
+        <a href="HomePage.html">התנתק</a>
+        <a href="TripsThatIDid.html">מסלולים שביצעתי</a>
+        <a href="TripsThatIWillDo.html">מסלולים שארצה לבצע</a>
+        <a href="MyProfile.html">הפרופיל שלי</a>
+        <a href="MyGroups.html">הקבוצות שלי</a>
+        <a href="SearchTrips.html">חיפוש מסלולים</a>
+        <a href="ContactUsAfterSignIn.html">צור קשר</a>
+    </nav>
+    <div class="Presentation">
+        <div></div>
+        <div  class="Background">
+            <h1>צור קשר</h1>
+          <form action="SearchTrips.html" class="form rtl" onsubmit="return alertContBeforeSignIn()">
+              <div class="signIn_form_group">
+                  <label id="dob">תוכן ההודעה*</label>
+                  <textarea id="bigTextBox" rows = "5" cols = "60" style="width: 300px;border: white; border-radius: 5px;" required maxlength="140"></textarea>
+              </div>
+              <button type="submit" class="btn_sn">אישור</button>
+          </form>
+        </div>
+        <div></div>
+    </div>
+<footer><p>TRIPSI - Discover Your Country!</p></footer>
+</body>
+</html>
