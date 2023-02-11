@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title #{pageTitle}
+        link(rel="stylesheet", href="../static/Styles.css")
+        script(defer, src="../static/data.js")
+    body(id=`${picture}`, onload=`${func},minDateToInsert()`, class="rtl")
+        nav
+            a(href="/HomePage") התנתק
+            a(href="/TripsThatIDid") מסלולים שביצעתי
+            a(href="/TripsThatIWillDo") מסלולים שארצה לבצע
+            a(href="/MyProfileDetails") הפרופיל שלי
+            a(href="/MyGroups") הקבוצות שלי
+            a(href="/SearchTrips") חיפוש מסלולים
+            a(href="/ContactUsAfterSignIn") צור קשר
+        div(class=`${presentation}`)
+            div
+            block content
+            div
+        footer
+            p TRIPSI - Discover Your Country!

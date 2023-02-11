@@ -1,0 +1,44 @@
+extends LayoutTrips 
+block content 
+    div(class="Background")
+        h1 מסלולים
+        table(id="results" class="myTrips")
+            tr
+                th שם המסלול
+                th איזור בארץ
+                th רמת קושי
+                th אורך המסלול
+                th כולל הליכה במים
+                th מסלול מוצל
+                th תיאור קצר
+                th
+            each n in pple 
+                tr 
+                td #{n.tripname} 
+                td #{n.area} 
+                td #{n.difficulty} 
+                td #{n.longoftrip} 
+                td #{n.water} 
+                td #{n.shadow} 
+                td #{n.description} 
+                td 
+                    button(id="btn"+`${n.id}`,onclick=`addTripToDid(${n.id},"btn"+${n.id})`) ביצעתי
+                    div(id=`${n.id}`,style="display: none;")
+                        form(action="/IDidTheTripResults", method="post")
+                            div
+                                label(for="commitionDate1") הכנס תאריך מתאים*
+                                input(name="commitionDate1", id="commitionDate1",type="date", required)
+                            div 
+                                label(for="tripThatIDidNow1", style="display: none")
+                                input(type="text",name="tripThatIDidNow1",id="tripThatIDidNow1",style="display:none;" ,value=`${n.id}`, required)
+                            input(type="submit", class="btn btnForm", value="אישור") 
+                    form(action="/IWantToDoIt", method="post")
+                        div
+                            label(for="tripThatIWant", style="display: none")
+                            input(type="text",name="tripThatIWant",id="tripThatIWant" ,style="display: none", value=`${n.id}`, required)
+                        input(type='submit', class="btn btnForm", value="ארצה לבצע")
+                    form(action="/TripRecomendations", method="get")
+                        div
+                            label(for="recommendations", style="display: none")
+                            input(type="text",name="recommendations",id="recommendations" ,style="display: none", value=`${n.id}`, required)
+                        input(type='submit', class="btn btnForm", value="צפייה בהמלצות")

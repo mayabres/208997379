@@ -1,0 +1,40 @@
+extends LayoutTrips 
+block content 
+    div(class="Background")
+        h1 מסלולים שארצה לבצע
+        table(id="results", class="myTrips")
+            thead
+                tr
+                    th שם המסלול
+                    th איזור בארץ
+                    th רמת קושי
+                    th אורך המסלול
+                    th כולל הליכה במים
+                    th מסלול מוצל
+                    th תיאור קצר
+                    th עדכון ביצוע מסלול
+            tbody(id="table_body1")
+                each n in trips 
+                    tr 
+                        td=n.tripname 
+                        td=n.area
+                        td=n.difficulty  
+                        td=n.longoftrip
+                        td=n.water 
+                        td=n.shadow 
+                        td=n.description 
+                        td
+                            form(action="/IDidTheTrip", method="post")
+                                div
+                                    label(for="commitionDate") הכנס תאריך מתאים*
+                                    input(name="commitionDate", id="commitionDate",type="date", required)
+                                div 
+                                    label(for="tripThatIDidNow", style="display: none")
+                                    input(type="text",name="tripThatIDidNow",id="tripThatIDidNow" ,style="display: none", value=`${n.id}`, required)
+                                input(type="submit", class="btn btnForm", value="אישור") 
+                            form(action="/IDontWantToDoIt", method="post")
+                                div
+                                    label(for="tripThatIWontDo", style="display: none")
+                                    input(type="text",name="tripThatIWontDo",id="tripThatIWontDo" ,style="display: none", value=`${n.id}`, required)
+                                input(type='submit', class="btn btnForm", value="הסר")
+//- , onsubmit="return IdidIt(t,'tripThatIDidNow')"

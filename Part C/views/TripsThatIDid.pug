@@ -1,0 +1,29 @@
+extends LayoutTrips 
+block content 
+    div(class="Background")
+        h1 מסלולים שביצעתי
+        div
+            table(class="myTrips")
+                thead
+                    tr
+                        th(style="width: 10%;") תאריך ביצוע
+                        th שם המסלול
+                        th(style="width: 8%") איזור בארץ
+                        th(style="width: 60%;") תיאור קצר
+                        th(style="width: 7%") כתיבת המלצה
+                tbody(id="table_body")
+                    each n in trips 
+                        tr 
+                            - let date = new Date(n.commitDate);
+                            - let formattedDate = date.toLocaleDateString('en-GB', { month: '2-digit', day: '2-digit', year: 'numeric' });
+                            td=formattedDate
+                            td=n.tripname 
+                            td=n.area 
+                            td=n.description 
+                            td
+                                form(action="/WriteRecommendation", method="get")
+                                    div
+                                        label(for="wantToRecommandID", style="display: none") 
+                                        input(type="text", style="display: none",id="wantToRecommandID", name="wantToRecommandID", value=`${n.id}`)
+                                    input(type='submit',class="btn btnForm",value="כתיבת המלצה")
+

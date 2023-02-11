@@ -1,0 +1,10 @@
+
+extends LayoutTrips 
+block content
+  div(class="Background")
+    h1 צור קשר
+    form(action="/createContactAfterSign", method="post", onsubmit=" return alertContBeforeSignIn()")
+      div(class="signIn_form_group")
+        label(for="contUsSignIn") תוכן ההודעה*
+        textarea(id="contUsSignIn", name="contUsSignIn",rows="5", cols="60", style="width: 300px;border: white; border-radius: 5px;", required="required", maxlength="140")
+      input(type="submit", class="btn_sn btnForm", value="אישור")

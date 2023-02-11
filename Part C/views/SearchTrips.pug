@@ -1,0 +1,67 @@
+extends LayoutTrips 
+block content 
+    div(class="Background")
+        h1 מצא מסלול לפי העדפותיך
+        p #{v1}
+        form(class="form rtl", action="/tripsResults", method="get")
+            div(class="signIn_form_group st")
+                label(id="area", for="optionsAreas") איזור בארץ*
+                select(id="optionsAreas", name="optionsAreas", required)
+            div(class="signIn_form_group st")
+                label(id="long", for="optionsLong") אורך המסלול*
+                select(id="optionsLong",name="optionsLong", required)
+            div(class="signIn_form_group st")
+                label(id="dif", for="optionsDif") רמת קושי*
+                select(id="optionsDif", name="optionsDif", required)
+            div(class="signIn_form_group st")
+                label(id="water", for="optionsWater") הליכה במים
+                select(id="optionsWater", name="optionsWater")
+            div(class="signIn_form_group st")
+                label(id="shadow", for="optionsShadow") מסלול מוצל
+                select(id="optionsShadow", name="optionsShadow")
+            input(type="submit", class="btn_sn bs btnForm", value="אישור")
+
+//- doctype html
+//- html(lang="en")
+//-     head
+//-         meta(charset="UTF-8")
+//-         meta(http-equiv="X-UA-Compatible", content="IE=edge")
+//-         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+//-         title Search Trips
+//-         link(rel="stylesheet", href="../static/Styles.css")
+//-         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+//-         script(defer, src="../static/data.js")
+//-     body(id="Trips", onload="addOptions()")
+//-         nav(class="nav_style")
+//-             a(href="/HomePage") התנתק
+//-             a(href="/TripsThatIDid") מסלולים שביצעתי
+//-             a(href="/TripsThatIWillDo") מסלולים שארצה לבצע
+//-             a(href="/MyProfileDetails") הפרופיל שלי
+//-             a(href="/MyGroups") הקבוצות שלי
+//-             a(href="/SearchTrips") חיפוש מסלולים
+//-             a(href="/ContactUsAfterSignIn") צור קשר
+//-         div(class="Presentation")
+//-             div
+//-             div(class="Background")
+//-                 p #{v1}
+//-                 h1 מצא מסלול לפי העדפותיך
+//-                 form(class="form rtl", action="/trips", method="get")
+//-                     div(class="signIn_form_group st")
+//-                         label(id="area", for="optionsAreas") איזור בארץ*
+//-                         select(id="optionsAreas", name="optionsAreas", required)
+//-                     div(class="signIn_form_group st")
+//-                         label(id="long", for="optionsLong") אורך המסלול*
+//-                         select(id="optionsLong",name="optionsLong", required)
+//-                     div(class="signIn_form_group st")
+//-                         label(id="dif", for="optionsDif") רמת קושי*
+//-                         select(id="optionsDif", name="optionsDif", required)
+//-                     div(class="signIn_form_group st")
+//-                         label(id="water", for="optionsWater") הליכה במים
+//-                         select(id="optionsWater", name="optionsWater")
+//-                     div(class="signIn_form_group st")
+//-                         label(id="shadow", for="optionsShadow") מסלול מוצל
+//-                         select(id="optionsShadow", name="optionsShadow")
+//-                     input(type="submit", class="btn_sn bs btnForm", value="אישור")
+//-             div
+//-         footer
+//-             p TRIPSI - Discover Your Country!
