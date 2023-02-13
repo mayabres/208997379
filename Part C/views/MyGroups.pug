@@ -1,0 +1,145 @@
+extends LayoutTrips 
+block content 
+    div(class="Background")
+        div
+            h1 הקבוצות שלי
+            button(id="createBtn",onclick="addFriendFormGroup()") צור קבוצה חדשה
+            div(id="hiddenForm",style="display: none;")
+                div
+                    table(id="groupMembers",class="myTrips")
+                        thead
+                            tr
+                                th שם
+                                th מייל
+                        tbody
+                            tr
+                                td #{firstName+" " +lastName}
+                                td #{userEmail}
+                            each n in groupMembers 
+                                tr 
+                                    td #{n.firstname + " " + n.lastname} 
+                                    td #{n.email} 
+                div
+                    form(action="/createGroup",class="form rtl",method="post", onsubmit="return createGroup()")
+                        div(class="signIn_form_group")
+                            label(for="groupName") שם הקבוצה
+                            input(id="groupName", class="textbox",name="groupName", type="text")
+                        input(class="btnForm",type="submit", value="צור קבוצה")
+                    form(action="/createAddMember", method="post", onsubmit="return addUserToGroup()")
+                        div(class="signIn_form_group")
+                            label(for="optionsMembers") בחר את חברי הקבוצה
+                            select(id="optionsMembers",name="optionsMembers" required)
+                                option(value="") בחר
+                                each n in pple
+                                    option(value=n.email) #{n.firstname+ " " + n.lastname + " - " + n.email}
+                        input(type="submit",class="btnForm",value="הוסף חבר") 
+                    form(action="/cancelCreation", method="post")
+                        input(type="submit",class="btnForm",value="בטל") 
+        table(id="myGroups1", class="myGroups")
+            thead
+                tr(class="clickable")
+                    th תאריך יצירת הקבוצה
+                    th שם הקבוצה
+                    th
+            tbody(id="table_body")
+                each n in groups 
+                    tr 
+                        - let date = new Date(n.creationdate);
+                        - let formattedDate = date.toLocaleDateString('en-GB', { month: '2-digit', day: '2-digit', year: 'numeric' });
+                        td=formattedDate
+                        td=n.name 
+                        td
+                            form(action="/GroupData", method="get")
+                                div
+                                    label(for="groupData", style="display: none")
+                                    input(type="text",name="groupData",id="groupData" ,style="display: none", value=`${n.id}`, required)
+                                input(type='submit', class="btn btnForm", value="צפה בפרטי הקבוצה")
+                            form(action="/RemoveMembership", method="post")
+                                div
+                                    label(for="removeMembership", style="display: none")
+                                    input(type="text",name="removeMembership",id="removeMembership" ,style="display: none", value=`${n.id}`, required)
+                                input(type='submit', class="btn btnForm", value="הסר חברות")
+//- doctype html
+//- html(lang="en")
+//-     head
+//-         meta(charset="UTF-8")
+//-         meta(http-equiv="X-UA-Compatible", content="IE=edge")
+//-         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+//-         title My Groups
+//-         link(rel="stylesheet", href="../static/Styles.css")
+//-         script(defer, src="../static/data.js")
+//-     body(id="MyGroups11", class="rtl",onload=`${func}`)
+//-         nav
+//-             a(href="/HomePage") התנתק
+//-             a(href="/TripsThatIDid") מסלולים שביצעתי
+//-             a(href="/TripsThatIWillDo") מסלולים שארצה לבצע
+//-             a(href="/MyProfileDetails") הפרופיל שלי
+//-             a(href="/MyGroups") הקבוצות שלי
+//-             a(href="/SearchTrips") חיפוש מסלולים
+//-             a(href="/ContactUsAfterSignIn") צור קשר
+//-         div(class="presentationTrips rtl")
+//-             div
+//-             div(class="Background")
+//-                 div
+//-                     h1 הקבוצות שלי
+//-                     p #{message}
+//-                     button(id="createBtn",onclick="addFriendFormGroup()") צור קבוצה חדשה
+//-                     div(id="hiddenForm",style="display: none;")
+//-                         div
+//-                             table(id="groupMembers",class="myTrips")
+//-                                 thead
+//-                                     tr
+//-                                         th שם
+//-                                         th מייל
+//-                                 tbody
+//-                                     tr
+//-                                         td #{firstName+" " +lastName}
+//-                                         td #{userEmail}
+//-                                     each n in groupMembers 
+//-                                         tr 
+//-                                             td #{n.firstname + " " + n.lastname} 
+//-                                             td #{n.email} 
+//-                         div
+//-                             form(action="/createGroup",class="form rtl",method="post", onsubmit="return createGroup()")
+//-                                 div(class="signIn_form_group")
+//-                                     label(for="groupName") שם הקבוצה
+//-                                     input(id="groupName", class="textbox",name="groupName", type="text")
+//-                                 input(class="btnForm",type="submit", value="צור קבוצה")
+//-                             form(action="/createAddMember", method="post")
+//-                                 div(class="signIn_form_group")
+//-                                     label(for="optionsMembers") בחר את חברי הקבוצה
+//-                                     select(id="optionsMembers",name="optionsMembers" required)
+//-                                         option(value="") בחר
+//-                                         each n in pple
+//-                                             option(value=n.email) #{n.firstname+ " " + n.lastname + " - " + n.email}
+//-                                 input(type="submit",class="btnForm",value="הוסף חבר") 
+//-                             form(action="/cancelCreation", method="post")
+//-                                 input(type="submit",class="btnForm",value="בטל") 
+//-                 p על מנת לצפות בפרטי הקבוצה - לחץ על השורה המתאימה בטבלה
+//-                 table(id="myGroups1", class="myGroups")
+//-                     thead
+//-                         tr(class="clickable")
+//-                             th תאריך יצירת הקבוצה
+//-                             th שם הקבוצה
+//-                             th
+//-                     tbody(id="table_body")
+//-                         each n in groups 
+//-                             tr 
+//-                                 - let date = new Date(n.creationdate);
+//-                                 - let formattedDate = date.toLocaleDateString('en-GB', { month: '2-digit', day: '2-digit', year: 'numeric' });
+//-                                 td=formattedDate
+//-                                 td=n.name 
+//-                                 td
+//-                                     form(action="/GroupData", method="get")
+//-                                         div
+//-                                             label(for="groupData", style="display: none")
+//-                                             input(type="text",name="groupData",id="groupData" ,style="display: none", value=`${n.id}`, required)
+//-                                         input(type='submit', class="btn btnForm", value="צפה בפרטי הקבוצה")
+//-                                     form(action="/RemoveMembership", method="post")
+//-                                         div
+//-                                             label(for="removeMembership", style="display: none")
+//-                                             input(type="text",name="removeMembership",id="removeMembership" ,style="display: none", value=`${n.id}`, required)
+//-                                         input(type='submit', class="btn btnForm", value="הסר חברות")
+//-             div
+//-         footer
+//-             p TRIPSI - Discover Your Country!

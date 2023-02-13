@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title TRIPSI-Travel In Israel
+        link(rel="stylesheet", type="text/css", href="../static/Styles.css")
+        script(defer, src="../static/data.js")
+    body(id="homepage_background")
+        nav
+            a(href="/HomePage") מסך הבית
+            a(href="/AboutUs") קצת עלינו
+            a(href="/ContactUs") צור קשר
+        img(class="homepage_logo", src="../static/Pictures/logo.PNG")
+        div(id="buttons_homepage")
+            button(onclick="window.location.href ='/SignIn';") התחבר
+            button(onclick="window.location.href ='/SignUp';") הירשם
+        footer(id="footHomePage")
+            p TRIPSI - Discover Your Country!

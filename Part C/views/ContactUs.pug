@@ -1,0 +1,18 @@
+extends LayoutBeforeSignIn
+block content 
+  div(class="Background")
+    h1 צור קשר
+    form(class="form rtl",action="/CreateContact", method="post", onsubmit=" return alertContBeforeSignIn()")
+      div(class="signIn_form_group")
+        label(for="firstNameContUs") שם פרטי*
+        input(id="firstNameContUs", class="textbox",type="text", name="firstNameContUs", placeholder="ישראל", required, minlength="2")
+      div(class="signIn_form_group")
+        label(for="lastNameContUs") שם משפחה*
+        input(id="lastNameContUs", class="textbox",type="text", name="lastNameContUs", placeholder="ישראלי", required, minlength="2")
+      div(class="signIn_form_group")
+        label(for="emailContUs") מייל*
+        input(id="emailContUs",class="textbox", name="emailContUs", type="email", placeholder="israel12@gmail.com", required)
+      div(class="signIn_form_group")
+        label(for="textContUs") תוכן ההודעה*
+        textarea(id="textContUs",name="textContUs", rows="5", cols="60", style="width: 200px;border: white; border-radius: 5px;", required, maxlength="140")
+      input(type="submit", class="btn_sn btnForm", value="אישור")
