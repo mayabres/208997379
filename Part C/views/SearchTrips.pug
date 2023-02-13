@@ -7,18 +7,33 @@ block content
             div(class="signIn_form_group st")
                 label(id="area", for="optionsAreas") איזור בארץ*
                 select(id="optionsAreas", name="optionsAreas", required)
+                    option(value="") בחר
+                    each n in areas
+                        option(value=n.area) #{n.area}
             div(class="signIn_form_group st")
                 label(id="long", for="optionsLong") אורך המסלול*
                 select(id="optionsLong",name="optionsLong", required)
+                    option(value="") בחר
+                    each n in longoftrips
+                        option(value=n.longoftrip) #{n.longoftrip}
             div(class="signIn_form_group st")
                 label(id="dif", for="optionsDif") רמת קושי*
                 select(id="optionsDif", name="optionsDif", required)
+                    option(value="") בחר
+                        each n in difficulties
+                            option(value=n.difficulty) #{n.difficulty}
             div(class="signIn_form_group st")
                 label(id="water", for="optionsWater") הליכה במים
                 select(id="optionsWater", name="optionsWater")
+                    option(value="") בחר
+                        each n in yesorno
+                            option(value=n.yesorno) #{n.yesorno}
             div(class="signIn_form_group st")
                 label(id="shadow", for="optionsShadow") מסלול מוצל
                 select(id="optionsShadow", name="optionsShadow")
+                    option(value="") בחר
+                        each n in yesorno
+                            option(value=n.yesorno) #{n.yesorno}
             input(type="submit", class="btn_sn bs btnForm", value="אישור")
 
 //- doctype html

@@ -17,7 +17,11 @@ app.set('view engine', 'pug');
 
 
 //create DB
-app.get('/CreateTable',[CreateDB.CreateTableUsers,
+app.get('/CreateTable',[CreateDB.CreateTableAreas,
+                        CreateDB.CreateTableLong,
+                        CreateDB.CreateTableDifficulty,
+                        CreateDB.CreateTableYesOrNo,
+                        CreateDB.CreateTableUsers,
                         CreateDB.CreateTableTrips,
                         CreateDB.CreateTableGroups,
                         CreateDB.CreateTableWillTrips,
@@ -26,7 +30,11 @@ app.get('/CreateTable',[CreateDB.CreateTableUsers,
                         CreateDB.CreateTableRecommendations,
                         CreateDB.CreateTableContactUs]);
 
-app.get('/InsertTable',[CreateDB.InsertDataUsers,
+app.get('/InsertTable',[CreateDB.InsertDataAreas,
+                        CreateDB.InsertDataLongOfTrips,
+                        CreateDB.InsertDataDifficulty,
+                        CreateDB.InsertDataYesOrNo,
+                        CreateDB.InsertDataUsers,
                         CreateDB.InsertDataTrips,
                         CreateDB.InsertDataWillTrips,
                         CreateDB.InsertDataDidTrips,
@@ -36,6 +44,10 @@ app.get('/InsertTable',[CreateDB.InsertDataUsers,
                         CreateDB.InsertDataGroupMembers]);
 
 app.get('/ShowTable',CreateDB.ShowTable);
+app.get('/ShowTableAreas',CreateDB.ShowTableAreas);
+app.get('/ShowTableLongOfTrips',CreateDB.ShowTableLongOfTrips);
+app.get('/ShowTableDifficulties',CreateDB.ShowTableDifficulties);
+app.get('/ShowTableYesOrNo',CreateDB.ShowTableYesOrNo);
 app.get('/ShowTableUsers',CreateDB.ShowTableUsers);
 app.get('/ShowTableTrips',CreateDB.ShowTableTrips);
 app.get('/ShowTableGroups',CreateDB.ShowTableGroups);
@@ -53,6 +65,10 @@ app.get('/DeleteTable',[CreateDB.DropTableGroupCreation,
                         CreateDB.DropTableWillTrips,
                         CreateDB.DropTableGroups,
                         CreateDB.DropTableTrips,
+                        CreateDB.DropTableAreas,
+                        CreateDB.DropTableLongOfTrips,
+                        CreateDB.DropTableDifficulties,
+                        CreateDB.DropTableYesOrNo,
                         CreateDB.DropTableUsers]);
 
 //post queries
@@ -81,7 +97,7 @@ app.get('/TripsThatIWillDo', CRUD.selectTripsIWillDo);
 app.get('/WriteRecommendation', CRUD.selectTripName);
 app.get('/MyGroups',CRUD.selectAllGroups);
 app.get('/GroupData',CRUD.WatchGroupData);
-
+app.get('/SearchTrips', CRUD.selectOptionsToCombo);
 
 app.get('/Check', (req,res)=>{
     res.redirect('MyGroups');
@@ -116,15 +132,6 @@ app.get('/ContactUs', (req,res)=>{
     });
 });
 
-app.get('/SearchTrips', (req,res)=>{
-    res.render('SearchTrips',{
-        presentation:"Presentation",
-        pageTitle: "Search Trips",
-        picture:"Trips",
-        func: "addOptions()"
-    });
-});
-
 app.get('/SignIn', (req,res)=>{
     res.render('SignIn', {
         v1: 'אנא הכנס/י מייל וסיסמה כדי להתחבר לאתר',
@@ -139,11 +146,7 @@ app.get('/SignUp', (req,res)=>{
 });
 
 app.get('/backToResults', (req,res)=>{
-    res.render('tripsResults',{
-        pple: req.cookies.mySearch,
-        presentation:"presentationTrips",
-        picture:"Trips"
-    });
+    res.redirect('tripsResults');
 });
 
 app.listen(port, () =>{

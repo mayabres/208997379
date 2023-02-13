@@ -4,36 +4,97 @@ const app = express();
 const url = require('url');
 const cookieParser = require('cookie-parser');
 
+const selectOptionsToCombo = (req,res)=>{
+    const Q1 = "SELECT * FROM areas"; 
+    const Q2 = "SELECT * FROM longoftrips"; 
+    const Q3 = "SELECT * FROM difficulties"; 
+    const Q4 = "SELECT * FROM yesorno"; 
+    sql.query(Q1, (err, mysqlres1)=>{
+        if (err) {
+            res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+            return;
+        };
+        sql.query(Q2, (err, mysqlres2)=>{
+            if (err) {
+                res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                return;
+            };
+            sql.query(Q3, (err, mysqlres3)=>{
+                if (err) {
+                    res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                    return;
+                };
+                sql.query(Q4, (err, mysqlres4)=>{
+                    if (err) {
+                        res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                        return;
+                    };
+                    res.render('SearchTrips', {
+                        areas: mysqlres1,
+                        longoftrips: mysqlres2,
+                        difficulties: mysqlres3,
+                        yesorno: mysqlres4,
+                        presentation:"Presentation",
+                        pageTitle: "Search Trips",
+                        picture:"Trips"
+                    });
+                    return;
+    
+                });
+            });
+        });
+    });
+}
+
 const selectTripsByCategories = (req,res)=>{
     if(!req.body){
         res.status(400).send({message: "content cannot be empty"});
         return;
     }
     let Q1 = "";
+    
+    res.cookie("search_area",req.query.optionsAreas);
+    res.cookie("search_long",req.query.optionsLong);
+    res.cookie("search_dif",req.query.optionsDif);
+    res.cookie("search_water",req.query.optionsWater);
+    res.cookie("search_shadow",req.query.optionsShadow);
     const user = req.cookies.sign_in_user;
-    if(req.query.optionsWater != '' & req.query.optionsShadow != ''){
-        Q1 = "SELECT * FROM trips WHERE area like '"+ req.query.optionsAreas+"' AND longoftrip like '"+ req.query.optionsLong +"' AND difficulty like '"+ req.query.optionsDif +"' AND water like '"+ req.query.optionsWater + "' AND shadow like '" +req.query.optionsShadow+"' AND id NOT IN (SELECT t.id FROM willTrips as w RIGHT JOIN trips as t ON w.tripID=t.id JOIN didTrips as d ON d.tripID=t.id WHERE w.userEmail LIKE ? OR d.userEmail LIKE ?)";
+    let area = req.query.optionsAreas;
+    let longof = req.query.optionsLong;
+    let dif = req.query.optionsDif;
+    let shadow = req.query.optionsShadow;
+    let water = req.query.optionsWater;
+    if(req.cookies.recommendation == 2){
+        area = req.cookies.search_area;
+        longof = req.cookies.search_long;
+        dif = req.cookies.search_dif;
+        shadow = req.cookies.search_shadow;
+        water = req.cookies.search_water;
+        res.cookie("search_area",area);
+        res.cookie("search_long",longof);
+        res.cookie("search_dif",dif);
+        res.cookie("search_water",water);
+        res.cookie("search_shadow",shadow);
+    }
+    if(water != '' & shadow != ''){
+        Q1 = "SELECT * FROM trips WHERE area like '"+ area+"' AND longoftrip like '"+ longof +"' AND difficulty like '"+ dif +"' AND water like '"+ req.query.optionsWater + "' AND shadow like '" +shadow+"' AND id NOT IN (SELECT t.id FROM willTrips as w RIGHT JOIN trips as t ON w.tripID=t.id JOIN didTrips as d ON d.tripID=t.id WHERE w.userEmail LIKE ? OR d.userEmail LIKE ?)";
     } 
-    else if(req.query.optionsWater != '' & req.query.optionsShadow == ''){
-        Q1 = "SELECT * FROM trips WHERE area like '"+ req.query.optionsAreas+"' AND longoftrip like '"+ req.query.optionsLong +"' AND difficulty like '"+ req.query.optionsDif +"' AND water like '"+ req.query.optionsWater+"' AND id NOT IN (SELECT t.id FROM willTrips as w RIGHT JOIN trips as t ON w.tripID=t.id JOIN didTrips as d ON d.tripID=t.id WHERE w.userEmail LIKE ? OR d.userEmail LIKE ?)";
+    else if(water != '' & shadow == ''){
+        Q1 = "SELECT * FROM trips WHERE area like '"+ area+"' AND longoftrip like '"+ longof +"' AND difficulty like '"+ dif +"' AND water like '"+ water+"' AND id NOT IN (SELECT t.id FROM willTrips as w RIGHT JOIN trips as t ON w.tripID=t.id JOIN didTrips as d ON d.tripID=t.id WHERE w.userEmail LIKE ? OR d.userEmail LIKE ?)";
     }
-    else if(req.query.optionsWater == '' & req.query.optionsShadow != ''){
-        Q1 = "SELECT * FROM trips WHERE area like '"+ req.query.optionsAreas+"' AND longoftrip like '"+ req.query.optionsLong +"' AND difficulty like '"+ req.query.optionsDif +"' AND shadow like '"+ req.query.optionsShadow+"' AND id NOT IN (SELECT t.id FROM willTrips as w RIGHT JOIN trips as t ON w.tripID=t.id JOIN didTrips as d ON d.tripID=t.id WHERE w.userEmail LIKE ? OR d.userEmail LIKE ?)";
+    else if(water == '' & shadow != ''){
+        Q1 = "SELECT * FROM trips WHERE area like '"+ area+"' AND longoftrip like '"+ longof +"' AND difficulty like '"+ dif +"' AND shadow like '"+ shadow +"' AND id NOT IN (SELECT t.id FROM willTrips as w RIGHT JOIN trips as t ON w.tripID=t.id JOIN didTrips as d ON d.tripID=t.id WHERE w.userEmail LIKE ? OR d.userEmail LIKE ?)";
     }else{
-        Q1 = "SELECT * FROM trips WHERE tr.area like '"+ req.query.optionsAreas+"' AND tr.longoftrip like '"+ req.query.optionsLong +"' AND tr.difficulty like '"+ req.query.optionsDif+"' AND id NOT IN (SELECT t.id FROM willTrips as w RIGHT JOIN trips as t ON w.tripID=t.id JOIN didTrips as d ON d.tripID=t.id WHERE w.userEmail LIKE ? OR d.userEmail LIKE ?)"; 
+        Q1 = "SELECT * FROM trips WHERE area like '"+ area+"' AND longoftrip like '"+ longof +"' AND difficulty like '"+ dif+"' AND id NOT IN (SELECT t.id FROM willTrips as w RIGHT JOIN trips as t ON w.tripID=t.id JOIN didTrips as d ON d.tripID=t.id WHERE w.userEmail LIKE ? OR d.userEmail LIKE ?)"; 
     }
+
+    res.cookie("recommendation",1);
     sql.query(Q1, [user,user],(err, mysqlres)=>{
         if (err) {
             console.log("error:", err);
-            res.status(400).render('tripsResults',{
-                v:"עדכון הביצוע לא התאפשר",
-                pple: req.cookies.mySearch,
-                presentation:"presentationTrips",
-                picture:"Trips"
-            });
+            res.status(400).send({message:"חיפוש המסלולים לא התאפשר כתוצאה משגיאה"});
             return;
         };
-        res.cookie("mySearch",mysqlres);
         res.render('tripsResults', {
             pple: mysqlres,
             picture:"Trips",
@@ -50,9 +111,10 @@ const selectTripsIDid = (req,res)=>{
         return;
     }
     const user = req.cookies.sign_in_user;
-    const Q1 = "SELECT * FROM didTrips as d join trips as t on d.tripID=t.id WHERE d.userEmail =?"; 
+    const Q1 = "SELECT * FROM didTrips as d join trips as t on d.tripID=t.id WHERE d.userEmail =? ORDER BY d.commitDate"; 
     sql.query(Q1,user, (err, mysqlres)=>{
         if (err) {
+            console.log("error:", err);
             res.status(400).send({message:"המסלולים שביצעת לא הועלו כתוצאה משגיאה"});
             return;
         };
@@ -130,6 +192,7 @@ const IdidItNowResults = (req,res)=>{
                 return;
             }
         });
+        res.cookie("recommendation",2);
         res.redirect('tripsResults');
         return;
     });
@@ -168,9 +231,11 @@ const IWantToDoIt = (req,res)=>{
     const Q1="INSERT INTO willTrips SET ?";
     sql.query(Q1,todo,(err, mysqlres)=>{
         if (err) {
+            console.log("error:", err);
             res.status(400).send("המסלול לא התווסף כתוצאה משגיאה");
             return;
         };
+        res.cookie("recommendation",2);
         res.redirect('tripsResults');
         return;
     });
@@ -201,6 +266,7 @@ const readRecommendations = (req,res)=>{
         res.status(400).send({message: "content cannot be empty"});
         return;
     }
+    res.cookie("recommendation",2);
     const id= req.query.recommendations;
     const Q1="SELECT * FROM recommendations WHERE tripID =?";
     sql.query(Q1,id,(err, mysqlres)=>{
@@ -266,15 +332,46 @@ const createUser = (req,res)=>{
             return;
         }
         res.cookie("sign_in_user", req.body.emailSignUp);
-        // console.groupCollapsed("created customer: ", {id: mysqlres.insertId});
-        res.render('SearchTrips',{
-            v1: "ברוכה הבאה " + req.cookies.sign_in_user,
-            presentation:"Presentation",
-            pageTitle: "Search Trips",
-            picture:"Trips",
-            func: "addOptions()"
-        });
-        return;
+        const Q2 = "SELECT * FROM areas"; 
+            const Q3 = "SELECT * FROM longoftrips"; 
+            const Q4 = "SELECT * FROM difficulties"; 
+            const Q5 = "SELECT * FROM yesorno"; 
+            sql.query(Q2, (err, mysqlres1)=>{
+                if (err) {
+                    res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                    return;
+                };
+                sql.query(Q3, (err, mysqlres2)=>{
+                    if (err) {
+                        res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                        return;
+                    };
+                    sql.query(Q4, (err, mysqlres3)=>{
+                        if (err) {
+                            res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                            return;
+                        };
+                        sql.query(Q5, (err, mysqlres4)=>{
+                            if (err) {
+                                res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                                return;
+                            };
+                            res.render('SearchTrips',{
+                                v1: "ברוכה הבאה " + req.body.emailSignUp,
+                                areas: mysqlres1,
+                                longoftrips: mysqlres2,
+                                difficulties: mysqlres3,
+                                yesorno: mysqlres4,
+                                presentation:"Presentation",
+                                pageTitle: "Search Trips",
+                                picture:"Trips",
+                                func: "addOptions()"
+                            });
+                            return;
+                        });
+                    });
+                });
+            });
     });
 };
 
@@ -288,11 +385,48 @@ const validateUser = (req,res)=>{
     sql.query(Q1, [req.query.emailSignIn,req.query.passwordSignIn], (err, mysqlres) => {
         if(mysqlres.length>0){
             res.cookie("sign_in_user",req.query.emailSignIn);
-            res.render('SearchTrips',{
-                v1: "ברוכה הבאה " +req.query.emailSignIn,
-                picture:"Trips",
-                presentation:"Presentation",
-                func: "addOptions()"
+            const Q2 = "SELECT * FROM areas"; 
+            const Q3 = "SELECT * FROM longoftrips"; 
+            const Q4 = "SELECT * FROM difficulties"; 
+            const Q5 = "SELECT * FROM yesorno"; 
+            sql.query(Q2, (err, mysqlres1)=>{
+                if (err) {
+                    console.log("error:", err);
+                    res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                    return;
+                };
+                sql.query(Q3, (err, mysqlres2)=>{
+                    if (err) {
+                        console.log("error:", err);
+                        res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                        return;
+                    };
+                    sql.query(Q4, (err, mysqlres3)=>{
+                        if (err) {
+                            console.log("error:", err);
+                            res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                            return;
+                        };
+                        sql.query(Q5, (err, mysqlres4)=>{
+                            if (err) {
+                                console.log("error:", err);
+                                res.status(400).send({message:"לא ניתן לחפש מסלולים כתוצאה משגיאה"});
+                                return;
+                            };
+                            res.render('SearchTrips', {
+                                v1: "ברוכה הבאה " + req.query.emailSignIn,
+                                areas: mysqlres1,
+                                longoftrips: mysqlres2,
+                                difficulties: mysqlres3,
+                                yesorno: mysqlres4,
+                                presentation:"Presentation",
+                                pageTitle: "Search Trips",
+                                picture:"Trips"
+                            });
+                            return;
+                        });
+                    });
+                });
             });
         }
         else{
@@ -366,7 +500,7 @@ const selectAllGroups = (req,res)=>{
         return;
     }
     const user = req.cookies.sign_in_user; 
-    sql.query("SELECT * FROM `groupMembers` as gm LEFT JOIN `groups` as gr on gm.groupID=gr.id where gm.userEmail=?", user,(err, mysqlres)=>{
+    sql.query("SELECT * FROM `groupMembers` as gm LEFT JOIN `groups` as gr on gm.groupID=gr.id where gm.userEmail=? ORDER BY gr.creationdate", user,(err, mysqlres)=>{
         if (err) {
             console.log("error:", err);
             res.status(400).send({message:"פרטי הקבוצות שאתה חבר בהן לא הועלו כתוצאה משגיאה"});
@@ -444,6 +578,7 @@ const removeMembership = (req,res)=>{
     const group = req.body.removeMembership; 
     sql.query(Q1, [user,group],(err, mysqlres)=>{
         if (err) {
+            console.log("error:", err);
             res.status(400).send({message:"החברות בקבוצה לא הוסרה"});
             return;
         };
@@ -734,4 +869,4 @@ const addMemberAfterCreation = (req, res)=>{
 
 module.exports= {selectTripsByCategories,createUser,validateUser, updateUserDetails,selectUserDetails,selectTripsIDid,selectTripsIWillDo,
     IDontWantToDoIt,IdidItNow,selectTripName,selectAllGroups,removeMembership,createContact,createContactAfterSign,writeRecommendation,IdidItNowResults,
-IWantToDoIt,readRecommendations,createAddGroupMember,cancelCreation,createGroup,WatchGroupData,addMemberAfterCreation};
+IWantToDoIt,readRecommendations,createAddGroupMember,cancelCreation,createGroup,WatchGroupData,addMemberAfterCreation,selectOptionsToCombo};

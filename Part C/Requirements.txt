@@ -4,6 +4,10 @@ Requirements
 a. Create path: /CreateTable
 b. Insert path: /InsertTable
 c. Select path: /ShowTable
+show table areas: /ShowTableAreas
+show table longoftrips: /ShowTableLongOfTrips
+show table difficulties: /ShowTableDifficulties
+show table yesorno: /ShowTableYesOrNo
 show table users: /ShowTableUsers
 show table trips: /ShowTableTrips
 show table groups: /ShowTableGroups
