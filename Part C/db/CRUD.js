@@ -332,7 +332,7 @@ const createUser = (req,res)=>{
                                 return;
                             };
                             res.render('SearchTrips',{
-                                v1: "ברוכה הבאה " + req.body.emailSignUp,
+                                v1: "ברוך הבא " + req.body.emailSignUp,
                                 areas: mysqlres1,
                                 longoftrips: mysqlres2,
                                 difficulties: mysqlres3,
@@ -389,7 +389,7 @@ const validateUser = (req,res)=>{
                                 return;
                             };
                             res.render('SearchTrips', {
-                                v1: "ברוכה הבאה " + req.query.emailSignIn,
+                                v1: "ברוך הבא " + req.query.emailSignIn,
                                 areas: mysqlres1,
                                 longoftrips: mysqlres2,
                                 difficulties: mysqlres3,
