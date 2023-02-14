@@ -2,7 +2,7 @@ extends LayoutTrips
 block content
     div(id="tripsRec" class="Background")
         h1(id="headerPage") המלצה על המסלול: #{" "+ trip}
-        form(class="form rtl", action="/sendRecommendation", method="post")
+        form(class="form rtl", action="/sendRecommendation", method="post", onsubmit="return alertRcommendation()")
             div
                 label(for="recommendTrip", style="display: none")
                 input(type="text",name="recommendTrip",id="recommendTrip" ,style="display: none", value=`${tripID}`, required)
@@ -10,37 +10,4 @@ block content
                 label(for="bigTextBox")
                 textarea(id="bigTextBox",name="bigTextBox", rows="5", cols="60", style="width: 300px;border: white; border-radius: 5px;", required, maxlength="140")
             input(type="submit", class="btn_sn bs btnForm", value="אישור") 
-//- doctype html
-//- html(lang="en")
-//-     head
-//-         meta(charset="UTF-8")
-//-         meta(http-equiv="X-UA-Compatible", content="IE=edge")
-//-         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-//-         link(rel="stylesheet", href="../static/Styles.css")
-//-         title Write Recommendation
-//-         script(defer, src="../static/data.js")
-//-     body(id="Trips",class="rtl", nload="writeRecommendation()")
-//-         nav
-//-             a(href="/HomePage") התנתק
-//-             a(href="/TripsThatIDid") מסלולים שביצעתי
-//-             a(href="/TripsThatIWillDo") מסלולים שארצה לבצע
-//-             a(href="/MyProfileDetails") הפרופיל שלי
-//-             a(href="/MyGroups") הקבוצות שלי
-//-             a(href="/SearchTrips") חיפוש מסלולים
-//-             a(href="/ContactUsAfterSignIn") צור קשר
-//-         div(class="presentationTrips")
-//-             div
-//-             div(id="tripsRec" class="Background")
-//-                 h1(id="headerPage") המלצה על המסלול: #{" "+ trip}
-//-                 p #{message} 
-//-                     form(class="form rtl", action="/sendRecommendation", method="post")
-//-                         div
-//-                             label(for="recommendTrip", style="display: none")
-//-                             input(type="text",name="recommendTrip",id="recommendTrip" ,style="display: none", value=`${tripID}`, required)
-//-                         div(class="form_group st")
-//-                             label(for="bigTextBox")
-//-                             textarea(id="bigTextBox",name="bigTextBox", rows="5", cols="60", style="width: 300px;border: white; border-radius: 5px;", required, maxlength="140")
-//-                         input(type="submit", class="btn_sn bs btnForm", value="אישור")
-//-             div
-//-         footer
-//-             p TRIPSI - Discover Your Country!
+

@@ -1,8 +1,4 @@
 const sql = require('./db');
-const express = require('express');
-const app = express();
-const url = require('url');
-const cookieParser = require('cookie-parser');
 
 const selectOptionsToCombo = (req,res)=>{
     const Q1 = "SELECT * FROM areas"; 
@@ -52,12 +48,6 @@ const selectTripsByCategories = (req,res)=>{
         return;
     }
     let Q1 = "";
-    
-    res.cookie("search_area",req.query.optionsAreas);
-    res.cookie("search_long",req.query.optionsLong);
-    res.cookie("search_dif",req.query.optionsDif);
-    res.cookie("search_water",req.query.optionsWater);
-    res.cookie("search_shadow",req.query.optionsShadow);
     const user = req.cookies.sign_in_user;
     let area = req.query.optionsAreas;
     let longof = req.query.optionsLong;
@@ -70,12 +60,12 @@ const selectTripsByCategories = (req,res)=>{
         dif = req.cookies.search_dif;
         shadow = req.cookies.search_shadow;
         water = req.cookies.search_water;
-        res.cookie("search_area",area);
-        res.cookie("search_long",longof);
-        res.cookie("search_dif",dif);
-        res.cookie("search_water",water);
-        res.cookie("search_shadow",shadow);
     }
+    res.cookie("search_area",area);
+    res.cookie("search_long",longof);
+    res.cookie("search_dif",dif);
+    res.cookie("search_water",water);
+    res.cookie("search_shadow",shadow);
     if(water != '' & shadow != ''){
         Q1 = "SELECT * FROM trips WHERE area like '"+ area+"' AND longoftrip like '"+ longof +"' AND difficulty like '"+ dif +"' AND water like '"+ req.query.optionsWater + "' AND shadow like '" +shadow+"' AND id NOT IN (SELECT t.id FROM willTrips as w RIGHT JOIN trips as t ON w.tripID=t.id JOIN didTrips as d ON d.tripID=t.id WHERE w.userEmail LIKE ? OR d.userEmail LIKE ?)";
     } 
@@ -139,27 +129,23 @@ const IdidItNow = (req,res)=>{
         "userEmail": user,
         "commitDate":req.body.commitionDate
     };
-    const toRemove={
-        tripID: req.body.tripThatIDidNow
-    }
-    console.log("hii");
     const Q1 = "INSERT INTO didTrips SET ?"
-    const Q2 = "DELETE FROM willTrips WHERE ?"
+    const Q2 = "DELETE FROM willTrips WHERE tripID=? AND userEmail=?"
     sql.query(Q1, didIt,(err,mysqlres) =>{
         if(err){
             console.log("error:", err);
             res.status(400).send({message:"עדכון הביצוע לא התאפשר"});
             return;
         }
-        sql.query(Q2,toRemove,(err,mysqlres) =>{
+        sql.query(Q2,[req.body.tripThatIDidNow,user],(err,mysqlres) =>{
             if(err){
                 console.log("error:", err);
                 res.status(400).send({message:"עדכון הביצוע לא התאפשר"});
                 return;
             }
+            res.redirect('TripsThatIWillDo');
+            return;
         });
-        res.redirect('TripsThatIWillDo');
-        return;
     });
 }
 
@@ -174,24 +160,13 @@ const IdidItNowResults = (req,res)=>{
         "userEmail": user,
         "commitDate":req.body.commitionDate1
     };
-    const toRemove={
-        tripID: req.body.tripThatIDidNow1
-    }
     const Q1 = "INSERT INTO didTrips SET ?"
-    const Q2 = "DELETE FROM willTrips where ?"
-    sql.query(Q1, didIt,(err,mysqlres) =>{
+    sql.query(Q1,didIt ,(err,mysqlres) =>{
         if(err){
             console.log("error:", err);
             res.status(400).send({message:"עדכון הביצוע לא התאפשר"});
             return;
         }
-        sql.query(Q2,toRemove,(err,mysqlres) =>{
-            if(err){
-                console.log("error:", err);
-                res.status(400).send({message:"עדכון הביצוע לא התאפשר"});
-                return;
-            }
-        });
         res.cookie("recommendation",2);
         res.redirect('tripsResults');
         return;

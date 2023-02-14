@@ -3,7 +3,7 @@ const path = require('path');
 const csv=require('csvtojson');
 
 const CreateTableAreas = (req,res,next)=> {
-    var Q1 = "CREATE TABLE IF NOT EXISTS `areas`(area VARCHAR(255) primary key)";
+    var Q1 = "CREATE TABLE IF NOT EXISTS `areas`(area VARCHAR(255) primary key not null)";
     SQL.query(Q1,(err,mySQLres)=>{
         if (err) {
             console.log("error ", err);
@@ -16,7 +16,7 @@ const CreateTableAreas = (req,res,next)=> {
 }
 
 const CreateTableLong = (req,res,next)=> {
-    var Q1 = "CREATE TABLE IF NOT EXISTS `longoftrips`(longoftrip VARCHAR(255) primary key)";
+    var Q1 = "CREATE TABLE IF NOT EXISTS `longoftrips`(longoftrip VARCHAR(255) primary key not null)";
     SQL.query(Q1,(err,mySQLres)=>{
         if (err) {
             console.log("error ", err);
@@ -29,7 +29,7 @@ const CreateTableLong = (req,res,next)=> {
 }
 
 const CreateTableDifficulty = (req,res,next)=> {
-    var Q1 = "CREATE TABLE IF NOT EXISTS `difficulties`(difficulty VARCHAR(255) primary key)";
+    var Q1 = "CREATE TABLE IF NOT EXISTS `difficulties`(difficulty VARCHAR(255) primary key not null)";
     SQL.query(Q1,(err,mySQLres)=>{
         if (err) {
             console.log("error ", err);
@@ -42,7 +42,7 @@ const CreateTableDifficulty = (req,res,next)=> {
 }
 
 const CreateTableYesOrNo = (req,res,next)=> {
-    var Q1 = "CREATE TABLE IF NOT EXISTS `yesorno`(yesorno VARCHAR(255) primary key)";
+    var Q1 = "CREATE TABLE IF NOT EXISTS `yesorno`(yesorno VARCHAR(255) primary key not null)";
     SQL.query(Q1,(err,mySQLres)=>{
         if (err) {
             console.log("error ", err);
@@ -94,7 +94,7 @@ const CreateTableGroups = (req,res,next)=> {
 }
 
 const CreateTableWillTrips = (req,res,next)=> {
-    var Q1 = "CREATE TABLE IF NOT EXISTS `willTrips`(tripID INT(11)  not null references trips(id),userEmail VARCHAR(255) not null references users(email),primary key (tripID ,userEmail ))";
+    var Q1 = "CREATE TABLE IF NOT EXISTS `willTrips`(tripID INT(11)  not null references trips(id),userEmail VARCHAR(255) not null references users(email),primary key (tripID ,userEmail))";
     SQL.query(Q1,(err,mySQLres)=>{
         if (err) {
             console.log("error ", err);
@@ -107,7 +107,7 @@ const CreateTableWillTrips = (req,res,next)=> {
 }
 
 const CreateTableDidTrips = (req,res,next)=> {
-    var Q1 = "CREATE TABLE IF NOT EXISTS `didTrips`(tripID INT(11)  not null references trips(id),userEmail VARCHAR(255) not null references users(email),commitDate DATE not null,primary key (tripID ,userEmail ))";
+    var Q1 = "CREATE TABLE IF NOT EXISTS `didTrips`(tripID INT(11)  not null references trips(id),userEmail VARCHAR(255) not null references users(email),commitDate DATE not null,primary key (tripID ,userEmail))";
     SQL.query(Q1,(err,mySQLres)=>{
         if (err) {
             console.log("error ", err);
@@ -133,7 +133,7 @@ const CreateTableGroupMembers = (req,res,next)=> {
 }
 
 const CreateTableRecommendations = (req,res,next)=> {
-    var Q1 = "CREATE TABLE IF NOT EXISTS `recommendations`(user VARCHAR(255) not null references users(email),tripID INT(11) not null references trips(id),recdate DATETIME not null,content VARCHAR(255) not null,primary key(user,tripID))";
+    var Q1 = "CREATE TABLE IF NOT EXISTS `recommendations`(user VARCHAR(255) not null references users(email),tripID INT(11) not null references trips(id),recdate DATETIME not null,content VARCHAR(255) not null,primary key(user,tripID,recdate))";
     SQL.query(Q1,(err,mySQLres)=>{
         if (err) {
             console.log("error ", err);

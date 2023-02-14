@@ -30,6 +30,10 @@ function alertContBeforeSignIn(){
     alert("תוכן ההודעה נשלח בהצלחה לבעלי האתר");
 }
 
+function alertRcommendation(){
+    alert("ההמלצה הועלתה בהצלחה!");
+}
+
 function minDateToInsert(){
     var today = new Date();
     var minDate = today.toISOString().split("T")[0];
